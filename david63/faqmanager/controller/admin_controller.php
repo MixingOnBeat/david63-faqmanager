@@ -151,7 +151,7 @@ class admin_controller implements admin_interface
 			case 'undo':
 				@copy($this->root_path . 'store/faq_backup/' . $file . '.' . $this->phpEx . '.bak', $this->root_path . 'language/' . $file . '.' . $this->phpEx);
 				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_FAQ_RESTORE');
-				trigger_error($this->user->lang('FAQ_EDIT_SUCCESS') . adm_back_link($this->u_action . "&amp;file={$file}"));
+				trigger_error($this->user->lang('FAQ_EDIT_SUCCESS') . adm_back_link($this->u_action . "&amp;action=file&amp;file={$file}"));
 			break;
 
 			case 'add':
@@ -178,7 +178,7 @@ class admin_controller implements admin_interface
 				{
 					$this->template->assign_vars(array(
 						'L_TITLE_EXPLAIN'		=> $this->user->lang['FAQ_CAT_TOPIC'],
-						'NAVIGATION'			=> "<a href=\"{$this->u_action}&amp;file={$file}\">{$file}</a>" . (($cat_id) ? ' -&gt; ' . "<a href=\"{$this->u_action}&amp;file={$file}&amp;cat={$cat_id}\">{$category}</a>" : ''),
+						'NAVIGATION'			=> "<a href=\"{$this->u_action}&amp;action=file&amp;file={$file}\">{$file}</a>" . (($cat_id) ? ' -&gt; ' . "<a href=\"{$this->u_action}&amp;file={$file}&amp;cat={$cat_id}\">{$category}</a>" : ''),
 						'VARIABLE_NAME'			=> $new_name,
 						'VARIABLE_VALUE'		=> $new_value,
 						'S_ADD'					=> true,
@@ -216,7 +216,7 @@ class admin_controller implements admin_interface
 					}
 					$this->template->assign_vars(array(
 						'L_TITLE_EXPLAIN'		=> $explain,
-						'NAVIGATION'			=> "<a href=\"{$this->u_action}&amp;file={$file}\">{$file}</a>" . (($cat_id) ? ' -> ' . "<a href=\"{$this->u_action}&amp;file={$file}&amp;cat={$cat_id}\">{$category}</a>" : '') . (($field_id) ? ' -> ' . $field : ''),
+						'NAVIGATION'			=> "<a href=\"{$this->u_action}&amp;action=file&amp;file={$file}\">{$file}</a>" . (($cat_id) ? ' -&gt; ' . "<a href=\"{$this->u_action}&amp;file={$file}&amp;cat={$cat_id}\">{$category}</a>" : '') . (($field_id) ? ' -&gt; ' . $field : ''),
 						'VARIABLE_NAME'			=> str_replace('"', '&quot;', ($field_id) ? $faq[$cat_id][$field_id][0] : $faq[$cat_id]['--']),
 						'VARIABLE_VALUE'		=> str_replace('"', '&quot;', ($field_id) ? $faq[$cat_id][$field_id][1] : $faq[$cat_id]['--']),
 						'S_EDIT'				=> true,
@@ -240,7 +240,7 @@ class admin_controller implements admin_interface
 
 					$this->output_faq($faq, $file);
 					$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_FAQ_DELETE');
-					trigger_error($this->user->lang('FAQ_DELETE_SUCCESS') . adm_back_link($this->u_action . "&amp;file={$file}" . (($field_id) ? "&amp;cat={$cat_id}" : '')));
+					trigger_error($this->user->lang('FAQ_DELETE_SUCCESS') . adm_back_link($this->u_action . "&amp;action=file&amp;file={$file}" . (($field_id) ? "&amp;cat={$cat_id}" : '')));
 				}
 				else
 				{
@@ -290,7 +290,7 @@ class admin_controller implements admin_interface
 				$this->template->assign_vars(array(
 					'L_TITLE_EXPLAIN'	=> $explain,
 					'L_CREATE'			=> ($cat_id) ? $this->user->lang('CREATE_FIELD') : $this->user->lang('CREATE_CATEGORY'),
-					'NAVIGATION'		=> "<a href=\"{$this->u_action}&amp;file={$file}\">{$file}</a>" . (($cat_id) ? ' -> ' . "<a href=\"{$this->u_action}&amp;file={$file}&amp;cat={$cat_id}\">{$category}</a>" : ''),
+					'NAVIGATION'		=> "<a href=\"{$this->u_action}&amp;action=file&amp;file={$file}\">{$file}</a>" . (($cat_id) ? ' -&gt; ' . "<a href=\"{$this->u_action}&amp;file={$file}&amp;cat={$cat_id}\">{$category}</a>" : ''),
 					'S_DISPLAY_LIST'	=> ($file) ? true : false,
 					'S_CAT'				=> (!$cat_id),
 				));
